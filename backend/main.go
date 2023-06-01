@@ -7,22 +7,22 @@ import (
 	cors "github.com/rs/cors/wrapper/gin"
 )
 
-type quiz struct {
-	Title string
-	Desc string
-	questions []question
+type Quiz struct {
+	Title     string
+	Desc      string
+	Questions []Question
 }
 
-type question struct {
-	Title string
-	Answers []string
+type Question struct {
+	Question     string
+	Answers      []string
 	CorrectIndex int
 }
 
-var Quiz = quiz{
+var quiz = Quiz{
 	Title: "snorres quiz",
 	Desc:  "Beskrivelser er vansklige å skrive",
-	Questions: []question{
+	Questions: []Question{
 		{
 			Question:     "What is the scientific name of a butterfly?",
 			Answers:      []string{"Apis", "Coleoptera", "Formicidae", "Rhopalocera"},
@@ -106,12 +106,13 @@ var Quiz = quiz{
 	},
 }
 
-func main(
+func main() {
 	r := gin.Default()
 	r.Use(cors.Default())
-
-)
+	r.GET("/", getData)
+	r.Run("localhost:8080")
+}
 
 func getData(c *gin.Context) {
-	c.inde
+	c.IndentedJSON(http.StatusOK, quiz)
 }
