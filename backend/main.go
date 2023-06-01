@@ -1,28 +1,8 @@
 package main
 
-import (
-	"net/http"
-
-	cors "github.com/rs/cors/wrapper/gin"
-
-	"github.com/gin-gonic/gin"
-)
-
-type quiz struct {
-	Title     string
-	Desc      string
-	Questions []question
-}
-
-type question struct {
-	Question     string
-	Answers      []string
-	CorrectIndex int
-}
-
 var Quiz = quiz{
-	Title: "test",
-	Desc:  "yoyoyo, this is description",
+	Title: "snorres quiz",
+	Desc:  "Beskrivelser er vansklige å skrive",
 	Questions: []question{
 		{
 			Question:     "What is the scientific name of a butterfly?",
@@ -105,14 +85,4 @@ var Quiz = quiz{
 			CorrectIndex: 1,
 		},
 	},
-}
-
-func main() {
-	r := gin.Default()
-	r.Use(cors.Default())
-	r.GET("/", getQiuz)
-	r.Run("localhost:8080")
-}
-func getQiuz(c *gin.Context) {
-	c.IndentedJSON(http.StatusOK, Quiz)
 }
