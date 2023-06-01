@@ -1,5 +1,24 @@
 package main
 
+import (
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+	cors "github.com/rs/cors/wrapper/gin"
+)
+
+type quiz struct {
+	Title string
+	Desc string
+	questions []question
+}
+
+type question struct {
+	Title string
+	Answers []string
+	CorrectIndex int
+}
+
 var Quiz = quiz{
 	Title: "snorres quiz",
 	Desc:  "Beskrivelser er vansklige å skrive",
@@ -85,4 +104,14 @@ var Quiz = quiz{
 			CorrectIndex: 1,
 		},
 	},
+}
+
+func main(
+	r := gin.Default()
+	r.Use(cors.Default())
+
+)
+
+func getData(c *gin.Context) {
+	c.inde
 }
